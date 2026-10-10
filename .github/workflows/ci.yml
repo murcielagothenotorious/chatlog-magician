@@ -1,0 +1,43 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run bundle:js
+      - name: legacy bundles are deterministic
+        run: |
+          sha256sum public/js/legacy-early.js public/js/legacy-early.js.map public/js/legacy-main.js public/js/legacy-main.js.map > /tmp/bundle-first.txt
+          npm run bundle:js
+          sha256sum public/js/legacy-early.js public/js/legacy-early.js.map public/js/legacy-main.js public/js/legacy-main.js.map > /tmp/bundle-second.txt
+          diff /tmp/bundle-first.txt /tmp/bundle-second.txt
+      - run: npm run render:body
+      - name: rendered body is in sync with body.tsx
+        run: git diff --exit-code -- app/legacy/body-html.ts
+      - run: npx prettier --check app api/_lib public/js public/color-palette/color-palette.ts scripts next.config.ts tests/static-assets.test.js tests/vercel-compat.test.js tests/compact-chrome.test.js tests/reference-layout.test.js tests/smoke.test.js tsconfig.json eslint.config.js package.json vercel.json playwright.config.js docs/react-migration-plan.md .github/workflows/ci.yml
+      - run: npm test
+      - run: npm run build:next
+
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser

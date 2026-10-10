@@ -1,0 +1,15 @@
+/* Cascade layer order for the whole app bundle. Imported FIRST in
+   app/layout.tsx so this statement declares the global layer order before
+   any stylesheet uses it (first declaration wins).
+   - legacy-override: a single reference-layout sizing rule that must beat
+     even app.css !important (same as before layering, when both lived in
+     `components` and specificity decided).
+   - legacy-app: styles/app.css, which is internally layered
+     (base/components). It sorts BELOW plain legacy so the other legacy
+     stylesheets keep beating it exactly as they did when the contest was
+     unlayered-beats-layered.
+   - legacy: every other styles/* sheet, wrapped in `@layer legacy`.
+   - properties/theme/base/components/utilities: Tailwind v4 + Kumo. They
+     sort above legacy, so Kumo components render exactly as shipped with
+     zero component-targeting overrides in our CSS. */
+@layer legacy-override, legacy-app, legacy, properties, theme, base, components, utilities;

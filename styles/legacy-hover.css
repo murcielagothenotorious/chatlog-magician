@@ -1,0 +1,21 @@
+/* Wrapped in @layer legacy — order + rationale in styles/layers.css. Add new rules INSIDE the layer. */
+@layer legacy {
+/* Hover states converted from legacy inline onmouseover/onmouseout handlers.
+ * The page is a static server render with no React listeners attached, so the
+ * old direct-style-mutation handlers became :hover rules. !important beats the
+ * inline base styles exactly like the old handlers did; un-hover restores the
+ * inline base, matching the old mouseout values. */
+#closeFeaturesModal:hover {
+  color: #fff !important;
+}
+#closeFeaturesBtn:hover {
+  opacity: 0.85;
+}
+.legacy-hover-card:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+.legacy-hover-link:hover {
+  color: #fff !important;
+  text-decoration-color: #fff !important;
+}
+} /* @layer legacy */

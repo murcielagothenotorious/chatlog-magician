@@ -1,0 +1,158 @@
+/* Tailwind v4 + Kumo UI entry. Imported LAST in app/layout.tsx.
+   Preflight is deliberately NOT imported: its element resets would restyle
+   the legacy jQuery/Foundation UI and the #output preview. Kumo components
+   are attribute-scoped ([data-kumo-*]) and render fine on the legacy base. */
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import '@cloudflare/kumo/styles/tailwind';
+
+@source "../node_modules/@cloudflare/kumo/dist/**/*.{js,ts,tsx}";
+
+/* ── Kumo Toast Typography & HUD Structure ──
+   Because Preflight is omitted to protect legacy Foundation/jQuery UI,
+   #kumoToastRoot must explicitly bind to --ui-font (Inter) and dense
+   app typography.
+   - Position: Fixed bottom-center (clean, focused HUD location)
+   - Stacking: z-index 100000 ensures alerts sit cleanly above modals/drawers
+   - Type: 13px Inter font with 500 weight, 12px description
+   - Appearance: Sleek dark glassmorphic card with subtle border & blur */
+#kumoToastRoot {
+  font-family: var(
+    --ui-font,
+    'Inter',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif
+  );
+}
+
+#kumoToastRoot,
+#kumoToastRoot *,
+#kumoToastRoot [data-kumo-component],
+#kumoToastRoot [data-toast-title],
+#kumoToastRoot [role='region'],
+#kumoToastRoot [role='dialog'],
+#kumoToastRoot button,
+#kumoToastRoot p,
+#kumoToastRoot span {
+  font-family: var(
+    --ui-font,
+    'Inter',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif
+  ) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Viewport */
+#kumoToastRoot [role='region'] {
+  position: fixed !important;
+  bottom: 28px !important;
+  left: 50% !important;
+  right: auto !important;
+  top: auto !important;
+  transform: translateX(-50%) !important;
+  z-index: 100000 !important;
+  width: min(calc(100vw - 32px), 360px) !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+/* Toast card */
+#kumoToastRoot [role='region'] > [role='dialog'] {
+  pointer-events: auto !important;
+  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  background: rgba(18, 20, 24, 0.94) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    0 8px 32px -4px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* Title */
+#kumoToastRoot [data-toast-title] {
+  font-size: 13px !important;
+  line-height: 20px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Description */
+#kumoToastRoot [role='region'] > [role='dialog'] p,
+#kumoToastRoot [role='region'] > [role='dialog'] [class*='text-kumo-default/70'] {
+  font-size: 12px !important;
+  line-height: 18px !important;
+  font-weight: 400 !important;
+  color: rgba(244, 244, 245, 0.72) !important;
+  margin: 0 !important;
+}
+
+/* Icon */
+#kumoToastRoot [data-toast-icon] {
+  width: 16px !important;
+  height: 16px !important;
+  margin-top: 2px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Action buttons */
+#kumoToastRoot button[data-kumo-component='Button']:not([data-kumo-part='close']) {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  height: 26px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f4f4f5 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease !important;
+}
+
+#kumoToastRoot button[data-kumo-component='Button']:not([data-kumo-part='close']):hover {
+  background-color: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+/* Close button */
+#kumoToastRoot [data-kumo-part='close'] {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  width: 22px !important;
+  height: 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  opacity: 0.55 !important;
+  transition:
+    opacity 0.15s ease,
+    background-color 0.15s ease !important;
+}
+
+#kumoToastRoot [data-kumo-part='close']:hover {
+  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}

@@ -1,0 +1,178 @@
+/* Wrapped in @layer legacy — order + rationale in styles/layers.css. Add new rules INSIDE the layer. */
+@layer legacy {
+.locale-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 34px;
+  margin: 0;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  color: #b9c4ce;
+  background: #171d24;
+}
+
+.locale-picker select {
+  width: auto;
+  height: 30px;
+  margin: 0;
+  padding: 0 20px 0 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  box-shadow: none;
+  font-size: 11px;
+}
+
+.help-guide {
+  display: grid;
+  gap: 10px;
+}
+
+.help-search {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  background: #151b22;
+}
+
+.help-search input {
+  height: 28px;
+  margin: 0;
+  border: 0;
+  color: #eef3f7;
+  background: transparent;
+  box-shadow: none;
+}
+
+.help-search:focus-within {
+  border-color: rgba(88, 180, 232, 0.65);
+}
+
+.help-search input:focus {
+  outline: none;
+}
+
+.help-guide mark {
+  padding: 0 2px;
+  border-radius: 3px;
+  color: #fff;
+  background: #1e40af;
+}
+
+.help-guide .help-section {
+  margin: 0;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.help-guide .help-section h3,
+.help-guide .help-section p {
+  margin: 0;
+}
+
+.help-guide .help-section p {
+  margin-top: 5px;
+  color: #abb7c2;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.help-empty {
+  margin: 0;
+  padding: 18px 10px;
+  color: #c8d1da;
+  text-align: center;
+}
+
+.help-empty i {
+  margin-right: 8px;
+  color: #58b4e8;
+}
+
+.tour-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(4, 7, 10, 0.78);
+}
+
+.tour-overlay[hidden] {
+  display: none;
+}
+
+.tour-card {
+  width: min(420px, 100%);
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  color: #edf2f6;
+  background: #1b222b;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.tour-card__meta,
+.tour-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tour-card h2 {
+  margin: 14px 0 6px;
+  font-size: 18px;
+}
+.tour-card p {
+  margin: 0 0 18px;
+  color: #b8c3ce;
+  line-height: 1.55;
+}
+.tour-icon {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  color: #c5ced7;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tour-card__meta span {
+  color: #8b95a1;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.tour-icon:hover {
+  border-radius: 4px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tour-target {
+  position: relative;
+  z-index: 12001 !important;
+  outline: 3px solid #58b4e8 !important;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tour-overlay *,
+  .help-modal * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+} /* @layer legacy */

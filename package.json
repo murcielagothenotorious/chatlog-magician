@@ -1,0 +1,81 @@
+{
+  "name": "gtaw-chatlog-magician",
+  "version": "2.1.0",
+  "description": "Convert GTA World chat logs into beautifully formatted images",
+  "type": "module",
+  "scripts": {
+    "start": "next start",
+    "pretest": "npm run bundle:js",
+    "test": "vitest run",
+    "test:browser": "playwright test",
+    "test:ui": "vitest --ui",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "build": "next build",
+    "dev": "next dev",
+    "build:next": "next build",
+    "start:next": "next start",
+    "render:body": "node --experimental-strip-types scripts/render-legacy-body.ts",
+    "predev": "npm run bundle:js && npm run render:body",
+    "prebuild": "npm run bundle:js && npm run render:body",
+    "prebuild:next": "npm run bundle:js && npm run render:body",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "serve:browser": "next start --port 3100",
+    "bundle:js": "node --experimental-strip-types scripts/bundle-legacy.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/murcielagothenotorious/gtaw-chatlog-magician-tr"
+  },
+  "keywords": [
+    "gtaw",
+    "gta-world",
+    "chatlog",
+    "roleplay",
+    "image-converter",
+    "screenshot-tool"
+  ],
+  "author": "blancodagoat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/murcielagothenotorious/gtaw-chatlog-magician-tr/issues"
+  },
+  "homepage": "https://github.com/murcielagothenotorious/gtaw-chatlog-magician-tr#readme",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@eslint/js": "^9.12.0",
+    "@playwright/test": "^1.61.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitest/ui": "^4.0.5",
+    "esbuild": "^0.28.2",
+    "eslint": "^9.12.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "fake-indexeddb": "^6.2.4",
+    "jsdom": "^29.1.1",
+    "prettier": "^3.3.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^4.0.5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1037.0",
+    "@cloudflare/kumo": "^2.14.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "@tailwindcss/postcss": "^4.3.3",
+    "next": "^16.3.8",
+    "postcss": "^8.5.28",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3"
+  }
+}
